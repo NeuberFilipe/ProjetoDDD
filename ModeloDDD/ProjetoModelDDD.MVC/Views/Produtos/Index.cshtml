@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ProjetoModelDDD.MVC.ViewModels.ProdutoViewModel>
+
+<hr />
+@using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Filtrar" class="btn btn-defalut btn-xs" />
+        @Html.TextBox("SearchString", null, new { @class = "btn btn-info btn-xs" })
+    </p>
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Disponivel)
+        </th>
+        <th>
+            @Html.DisplayName("Cliente")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disponivel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ProdutoId }, new { @class = "btn btn-success btn-xs" }) 
+            @Html.ActionLink("Detalhes", "Details", new { id=item.ProdutoId }, new { @class = "btn btn-info btn-xs" }) 
+            @Html.ActionLink("Deletar", "Delete", new { id=item.ProdutoId }, new { @class = "btn btn-danger btn-xs" })
+        </td>
+    </tr>
+}
+</table>
+
+<p>
+    @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-primary btn-xs" })
+</p>
